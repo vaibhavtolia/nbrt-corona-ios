@@ -1,0 +1,25 @@
+2013-07-11 10:53:08.879 NewProject[3700:c07] Multi-tasking -> Device: YES, App: YES
+2013-07-11 10:53:08.927 NewProject[3700:c07] Resetting plugins due to page load.
+2013-07-11 10:53:08.973 NewProject[3700:c07] Finished load of: file:///Users/vaibhavtolia/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/1307E186-B738-4153-B9E3-6941FB77E5A1/NewProject.app/www/index.html
+2013-07-11 10:53:09.000 NewProject[3700:c07] DEPRECATION NOTICE: The Connection ReachableViaWWAN return value of '2g' is deprecated as of Cordova version 2.6.0 and will be changed to 'cellular' in a future release. 
+2013-07-11 10:53:09.003 NewProject[3700:c07] Received Event: deviceready
+2013-07-11 10:53:09.006 NewProject[3700:c07] created tables sucess
+2013-07-11 10:53:09.008 NewProject[3700:c07] Chapter id :  1
+2013-07-11 10:53:09.009 NewProject[3700:c07] Chapter id :  2
+2013-07-11 10:53:09.010 NewProject[3700:c07] Chapter id :  3
+2013-07-11 10:53:09.011 NewProject[3700:c07] Chapter id :  4
+2013-07-11 10:53:09.013 NewProject[3700:c07] Chapter id :  5
+2013-07-11 10:53:09.014 NewProject[3700:c07] Chapter id :  6
+2013-07-11 10:53:09.015 NewProject[3700:c07] Chapter id :  7
+2013-07-11 10:53:13.989 NewProject[3700:c07] Resetting plugins due to page load.
+2013-07-11 10:53:13.999 NewProject[3700:c07] Finished load of: file:///Users/vaibhavtolia/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/1307E186-B738-4153-B9E3-6941FB77E5A1/NewProject.app/www/domain.html
+2013-07-11 10:53:14.023 NewProject[3700:c07] Received Event: deviceready
+2013-07-11 10:53:15.104 NewProject[3700:c07] Resetting plugins due to page load.
+2013-07-11 10:53:15.146 NewProject[3700:c07] Finished load of: file:///Users/vaibhavtolia/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/1307E186-B738-4153-B9E3-6941FB77E5A1/NewProject.app/www/chapter.html
+2013-07-11 10:53:15.155 NewProject[3700:c07] device ready
+2013-07-11 10:53:15.158 NewProject[3700:c07] 1 What differentiated benefits does your offering provide ?
+2013-07-11 10:53:15.159 NewProject[3700:c07] 2 What evidence do you have that customers will buy?
+2013-07-11 10:53:15.159 NewProject[3700:c07] 3 Does your target market have the potential to grow? Evidence?
+2013-07-11 10:53:15.160 NewProject[3700:c07] 4 What other segments could benefit?
+2013-07-11 10:53:15.160 NewProject[3700:c07] 5 Can you develop capabilities that are transferable?
+Terminating in response to SpringBoard's termination.

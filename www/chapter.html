@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <a href="#" data-url="back"><div id="back" class="header-button"></div></a>
+                <span id="heading1">the new business</span>
+                <span id="heading2">road test</span>
+                <a href="#" data-url="menu"><div id="menu" class="header-button"></div></a>
+            </div>
+            <a href="#" data-url="summary">
+                <div class="title">
+                    <span id="title-text">Chapter Name</span><span id="info"></span>
+                </div> 
+            </a>
+            <a href="#" data-url="judgement" id="judgement">
+                <img src="img/note_icon.png" id="note" />
+            </a>
+            <div class="wrapper" id="chapter-wrapper">
+                
+            </div>
+            <div class="rating">
+                <div><a href="#" data-url="rating" data-value="1"><div>Very Unattractive</div></a></div>
+                <div><a href="#" data-url="rating" data-value="2"><div>Unattractive</div></a></div>
+                <div><a href="#" data-url="rating" data-value="3"><div>Mixed</div></a></div>
+                <div><a href="#" data-url="rating" data-value="4"><div>Attractive</div></a></div>
+                <div><a href="#" data-url="rating" data-value="5"><div>Very Attractive</div></a></div>
+            </div>
+        </div>
+        <div class="sidemenu">
+            <div id="sidemenu">
+                <ul>
+                    <a href="#" data-url="chapter" data-value="1"><li>Micro-Market Test</li></a>
+                    <a href="#" data-url="chapter" data-value="2"><li>Macro-Market Test</li></a>
+                    <a href="#" data-url="chapter" data-value="3"><li>Macro-Industry Test</li></a>
+                    <a href="#" data-url="chapter" data-value="4"><li>Micro-Industry Test</li></a>
+                    <a href="#" data-url="chapter" data-value="5"><li>Mission Test</li></a>
+                    <a href="#" data-url="chapter" data-value="6"><li>Ability to Execute Test</li></a>
+                    <a href="#" data-url="chapter" data-value="7"><li>Connectedness Test</li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="overlay">
+            <div id="summary">
+                <div id="title"></div>
+                <div id="content"></div>
+                <div id="controls">
+                    <a href="#" data-url="close-summary"><div class="button">Close</div></a>
+                </div>
+            </div>
+            <div id="risk-box">
+                <div id="title">Add Risk</div>
+                <div>
+                    <a href="#" data-url="addrisk" data-type="text"><div><img src="img/text.png" height="24"/><span>Add Note</span></div></a>
+                    <a href="#" data-url="addrisk" data-type="media"><div><img src="img/camera.png" height="24"/><span>Capture Media</span></div></a>
+                    <a href="#" data-url="addrisk" data-type="audio"><div><img src="img/audio.png" height="24"/><span>Capture Audio</span></div></a>
+                </div>
+                <div id="controls">
+                    <a href="#" data-url="close-riskbox"><div class="button">Close</div></a>
+                </div>
+            </div>
+            <div id="text-box">
+                <div id="title">Edit Note</div>
+                <div class="holder">
+                    <div class="question"></div>
+                    <textarea class="textarea" id="ans"></textarea>
+                </div>
+                <div id="controls">
+                    <a href="#" data-url="save-note"><div class="button">Save</div></a>
+                    <a href="#" data-url="close-textbox"><div class="button">Close</div></a>
+                </div>
+            </div>
+        </div>
+        <div id="toast">
+            <div id="toast-con"></div>
+        </div>
+        <div id="image-viewer" class="hidden">
+            <div class="header">
+                <div>Photo</div>
+                <a href="#" data-url="close-gallery">
+                    <div id="close">
+                        <img src="img/close.png" height="30" />
+                    </div>
+                </a>
+            </div>
+                <img class="img" />
+            </div>
+        </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/db_controller.js"></script>
+        <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="js/chapter.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

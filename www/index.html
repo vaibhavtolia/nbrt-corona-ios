@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Introduction</title>
+    </head>
+    <body>
+        <div class="container">
+            <div id="page-wrapper">
+                <div>
+                    <div class="page" id="page-1">
+                        <h2>Acknowledgement</h2>
+                        <div>
+                            This app includes material from <i>The New Business Road Test: What Entrepreneurs Should Do <u>Before</u> Launching a Lean Start-Up (fourth edition)</i> written by John Mullins and published by Pearson Education Limited, 2013
+                        </div>
+                    </div>
+                    <div class="page" id="page-2">
+                        <h2>Why this app?</h2>
+                        <div>
+                            The New Business Road Test app enables entrepreneurs to road test their start-up idea while out and about it. It assists the user in gathering real-world evidence to answer the most crucial questions they face : "Why will or won't my idea work?" The app, like the book, does so by providing an evidence based approach to answering three key fundamental questions: Is this an attractive market? Do you really want to compete in this industry? Is yours the right team to pursue this particular opportunity? 
+                        </div>
+                    </div>
+                    <div class="page" id="page-3">
+                        <h2>How to Use</h2>
+                        <div>
+                            You can record your responses to questions asked in the app in the form of text, audio recordings or images. The icons used are : <br>
+                            <table id="intro-table">
+                                <tr>
+                                    <td><img src="img/text_w.png" height="26" /></td>
+                                    <td>Text</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="img/camera_w.png" height="26" /></td>
+                                    <td>Media</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="img/audio_w.png" height="26" /></td>
+                                    <td>Audio</td>
+                                </tr>
+                            </table>
+                            All the data you add is stored on your device and no data is uploaded to the cloud without your consent.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="controls-wrapper">
+            <a href="#" data-url="next" class="control-button"><div class="triangle" id="prev"></div></a>
+            <a href="#" data-url="prev" class="control-button"><div class="triangle" id="next"></div></a>
+            <a href="#" data-url="continue" id="continue" class="control-button"><div>Start</div></a>
+            <a href="#" data-url="skip" id="skip"><div>skip</div></a>
+        </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/db.js"></script>
+        <script type="text/javascript" src="js/db_controller.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

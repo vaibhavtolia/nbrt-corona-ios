@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cordova>
+
+	<plugins>
+		<plugin name="Camera" value="CDVCamera" />
+		<plugin name="Capture" value="CDVCapture" />
+		<plugin name="Media" value="CDVSound" />
+		<plugin name="File" value="CDVFile" />
+		<plugin name="FileTransfer" value="CDVFileTransfer" />
+	</plugins>
+
+	<access origin="*" />
+
+</cordova>

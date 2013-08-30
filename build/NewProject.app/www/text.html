@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Make Note</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <a href="#" data-url="back"><div id="back" class="header-button"></div></a>
+                <span id="heading1">the new business</span>
+                <span id="heading2">road test</span>
+            </div>
+            <div class="title">
+                <span id="title-text">Make Note</span>
+            </div> 
+            <div class="wrapper" id="answer-wrapper">
+                <div class="holder">
+                    <div class="question" id="q"></div>
+                    <textarea class="textarea" id="note"></textarea>
+                </div> 
+                <div class="action-bar">
+                    <a href="#" data-url="save"><div class="button">Save</div></a>
+                    <a href="#" data-url="back"><div class="button">Cancel</div></a>
+                </div>
+            </div>
+            
+        </div>
+        <div id="toast">
+            <div id="toast-con"></div>
+        </div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="js/db_controller.js"></script>
+        <script type="text/javascript" src="js/text.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
