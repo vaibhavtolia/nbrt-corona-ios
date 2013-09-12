@@ -6,6 +6,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/trip.css" />
         <title>Choose Domain</title>
     </head>
     <body>
@@ -17,7 +18,7 @@
             </div>
             <div class="title">
                 <span id="title-text">Choose Domain</span>
-                <a href="#" data-url="showideas" class="ideawrapper">
+                <a href="#" id="ideas-con" data-url="showideas" class="ideawrapper">
                     <div>
                         <div id="ideaname"></div>
                     </div>
@@ -28,7 +29,7 @@
                     <a href="#" data-url="idea" data-value="0"><li>New Idea</li></a>
                 </ul>
             </div>
-            <div class="wrapper">
+            <div class="wrapper" style="text-align:center;">
                 <!-- <div id="graphic-holder">
                     <div id="rectangle">
                         <div></div>
@@ -40,7 +41,10 @@
 
                     </div>
                 </div> -->
-                <img src="img/domain_graphic.png" width="98%" />
+                <!-- <img src="img/domain_graphic.png" width="98%" /> -->
+                <div id="canvas_container">
+                    <canvas id="sevendomain">
+                </div>
             </div>
             <div class="footer">
                 <a data-url="back" href="intro.html"><div class="button" id="left">Back</div></a>
@@ -51,6 +55,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/db_controller.js"></script>
         <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="js/trip.js"></script>
         <script type="text/javascript" src="js/domain.js"></script>
         <script type="text/javascript">
             app.initialize();

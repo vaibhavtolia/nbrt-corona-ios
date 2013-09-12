@@ -35,6 +35,8 @@ var app = {
             console.log("idea chapter",app.idea_id);
         }
         app.getChapterRating();
+        app.init_tour();
+        app.start_tour();
 
         //db_controller.get_risks();
     },
@@ -410,5 +412,35 @@ var app = {
     openJugement : function(){
         var url = "judgement.html?ch="+app.chapter_id+"&idea_id="+app.idea_id;
         window.location = url;
-    }
+    },
+
+    init_tour : function(){
+        app.tour = new Trip([
+            {
+                sel : $("#menu"),
+                content : 'Tap here change domain',
+                position : 's',
+                nextLabel : 'Okay'
+            },
+            {
+                sel : $("#note"),
+                content : "Tap here to add overall judgement for the domain",
+                position : 's',
+                nextLabel : 'Okay'
+            },
+            {
+                sel : $(".rating"),
+                content : "Tap here to add rating for this domain",
+                position : 'n',
+                finishLabel : 'Okay'
+            }
+        ],{
+            delay : -1,
+            showNavigation : true
+        });
+    },
+
+    start_tour : function(){
+        app.tour.start();
+    },
 };

@@ -119,6 +119,19 @@ var db_controller = {
 		})
 	},
 
+	get_all_ratings : function(idea_id,callback){
+		db.transaction(function(tx){
+			tx.executeSql("SELECT rating, chapter_id FROM rating WHERE idea_id = "+idea_id,[],function(tx,results){
+				var response = [];
+				for(var i =0; i<results.rows.length; i++){
+					console.log("daya",JSON.stringify(results.rows.item(i)));
+					response.push(results.rows.item(i));
+				}
+				callback(response);
+			},errorDB);
+		});
+	},
+
 	get_all_questions : function(chapter_id,callback){
 		db.transaction(function(tx){
 			tx.executeSql("SELECT id,question FROM questions WHERE chapter_id = "+chapter_id,[],function(tx,results){
