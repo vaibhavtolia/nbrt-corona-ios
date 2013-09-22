@@ -303,7 +303,7 @@ var app = {
         db_controller.update_chapter_rating(app.idea_id,app.chapter_id,rating);
         $(".rating a").removeClass("selected-rating");
         parent.addClass('selected-rating');
-        helper.makeToast("update rating successfully");
+        helper.makeToast("updated rating successfully");
     },
     getChapterRating : function(){
         console.log('called chapter raitng');

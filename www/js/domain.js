@@ -241,7 +241,7 @@ var app = {
         //draw sectors
         canvas_context.moveTo(half_width,half_height);
         
-        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(5,ratings));
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(7,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(1/6)*Math.PI,(5/6)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
@@ -255,7 +255,7 @@ var app = {
         
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(6,ratings));
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(5,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(5/6)*Math.PI,(3/2)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
@@ -271,7 +271,7 @@ var app = {
         canvas_context.fillText("and down value chain",half_width-50,half_height+74);
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(7,ratings));
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(6,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(3/2)*Math.PI,(13/6)*Math.PI);        
         canvas_context.lineTo(half_width,half_height);
