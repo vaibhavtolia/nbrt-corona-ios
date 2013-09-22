@@ -51,6 +51,9 @@ var app = {
                 db_controller.insert_answer(app.idea_id,app.qid,"text",answer,function(a){
                     if(a){
                         helper.makeToast("Added note successfully");
+                        setTimeout(function(){
+                            helper.goBack();
+                        },1000)
                     }
                 })
             }

@@ -80,6 +80,9 @@ var app = {
             db_controller.insert_answer(app.idea_id,app.qid,app.response_type,RECORD_FILENAME,function(a){
                 if(a){
                     helper.makeToast("Added media successfully");
+                    setTimeout(function(){
+                        helper.goBack();
+                    },1000);
                 }
                 else{
                     helper.makeToast("There occured some error, please try again");
