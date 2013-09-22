@@ -24,9 +24,8 @@ var app = {
         }
         app.bindEventListeners();
         app.getAllIdeas();
-        app.init_tour();
-        app.start_tour();
-        //app.generate_seven_domain();
+        app.check_tour();
+        app.generate_seven_domain();
     },
 
     bindEventListeners : function(){
@@ -53,6 +52,7 @@ var app = {
         });
     },
 
+
     init_tour : function(){
         app.tour = new Trip([
             {
@@ -71,10 +71,25 @@ var app = {
             delay : -1,
             showNavigation : true
         });
+
+        helper.update_tour_count('domain_tour_count');
     },
 
     start_tour : function(){
         app.tour.start();
+    },
+
+    //checks from localstorage if the tour has to be initialized or not
+    check_tour : function(){
+        try{
+            var tour_count = localStorage.getItem("domain_tour_count");
+            if(tour_count == null || tour_count < 3){
+                app.init_tour();
+                app.start_tour();
+            }
+        }catch(e){
+            console.log(e);
+        }
     },
 
     showChapters : function(){
@@ -188,7 +203,7 @@ var app = {
         
         canvas_context.fillStyle = app.getDomainColor(1);
         canvas_context.beginPath();
-        canvas_context.arc(half_width,half_height,half_width/1.4,(1/6)*Math.PI,(5/6)*Math.PI);
+        canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(1/6)*Math.PI,(5/6)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
         canvas_context.closePath();
         canvas_context.stroke();
@@ -202,7 +217,7 @@ var app = {
 
         canvas_context.fillStyle = app.getDomainColor(1);
         canvas_context.beginPath();
-        canvas_context.arc(half_width,half_height,half_width/1.4,(5/6)*Math.PI,(3/2)*Math.PI);
+        canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(5/6)*Math.PI,(3/2)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
         canvas_context.closePath();
         canvas_context.stroke();
@@ -218,7 +233,7 @@ var app = {
 
         canvas_context.fillStyle = app.getDomainColor(1);
         canvas_context.beginPath();
-        canvas_context.arc(half_width,half_height,half_width/1.4,(3/2)*Math.PI,(13/6)*Math.PI);        
+        canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(3/2)*Math.PI,(13/6)*Math.PI);        
         canvas_context.lineTo(half_width,half_height);
         canvas_context.closePath();
         canvas_context.stroke();
@@ -244,6 +259,17 @@ var app = {
         canvas_context.font = "18px Arial"
         canvas_context.fillText("Team Domains",half_width-60,half_height+7.5);
         canvas_context.closePath();
+    },
+
+    getCircleRadius : function(width,height){
+        var radius;
+        if( width > height){
+            radius = (height/1.4)/2;
+        }
+        else{
+            radius = (width/1.4)/2;
+        }
+        return radius;
     },
 
     getDomainColor : function(rating){

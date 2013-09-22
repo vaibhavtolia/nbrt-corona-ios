@@ -32,11 +32,10 @@ var app = {
         }
         if( !helper.isNull( url_params.idea_id ) ){
             app.idea_id = url_params.idea_id;
-            console.log("idea chapter",app.idea_id);
+            //console.log("idea chapter",app.idea_id);
         }
         app.getChapterRating();
-        app.init_tour();
-        app.start_tour();
+        app.check_tour();
 
         //db_controller.get_risks();
     },
@@ -49,7 +48,7 @@ var app = {
 
                 //console.log('found/created dir : '+dir.fullPath);
                 var fullPath = "file://localhost"+dir.fullPath;
-                app.audio_fullpath = fullPath+"/";
+                app.audio_fullpath = fullPath+"/audio/";
                 app.video_fulpath = fullPath+"/video/";
                 app.image_fullpath = fullPath+"/images/";
 
@@ -423,6 +422,12 @@ var app = {
                 nextLabel : 'Okay'
             },
             {
+                sel : $(".title"),
+                content : 'Tap here to see the summary for the domain',
+                position : 's',
+                nextLabel : 'Okay'  
+            },
+            {
                 sel : $("#note"),
                 content : "Tap here to add overall judgement for the domain",
                 position : 's',
@@ -438,9 +443,24 @@ var app = {
             delay : -1,
             showNavigation : true
         });
+
+        helper.update_tour_count("chapter_tour_count");
+
     },
 
     start_tour : function(){
         app.tour.start();
     },
+
+    check_tour : function(){
+        try{
+            var tour_count = localStorage.getItem("chapter_tour_count");
+            if( tour_count == null || tour_count < 3){
+                app.init_tour();
+                app.start_tour();
+            }
+        }catch(e){
+            console.log(e);
+        }
+    }
 };

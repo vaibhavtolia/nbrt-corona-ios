@@ -44,5 +44,22 @@ var helper = {
         else{ 
             return true;
         }
+    },
+
+    update_tour_count : function(localstorage_key){
+        try{
+            var count = parseInt(localStorage.getItem(localstorage_key));
+            console.log(localstorage_key,count);
+            if( count == null ){
+                count = 1;
+            }
+            else{
+                count += 1;
+            }
+            console.log("updated count",count);
+            localStorage.setItem(localstorage_key,count); 
+        }catch(e){
+            console.log(e);
+        }
     }
 }

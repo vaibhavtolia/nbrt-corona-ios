@@ -141,7 +141,19 @@ function gotFsForCreate(fileSystem) {
 
     if (!RECORD_FILEPATH) {
 
-        RECORD_FILEPATH = fileSystem.root.fullPath + '/' + RECORD_FILENAME;
+        var folder = "nbrt/audio/";
+        var fullPath = "";
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+                var entry = fileSystem.root;
+                entry.getDirectory(folder, {create: true, exclusive: false}, function(dir){
+
+                    //console.log('found/created dir : '+dir.fullPath);
+                    fullPath = "file://localhost"+dir.fullPath;
+                });
+        },null);
+
+        RECORD_FILEPATH = fullPath + '/' + RECORD_FILENAME;
         console.log('noting record file path as: ' + RECORD_FILEPATH);
     }
 
