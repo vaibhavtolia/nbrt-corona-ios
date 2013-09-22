@@ -124,7 +124,7 @@ var db_controller = {
 			tx.executeSql("SELECT rating, chapter_id FROM rating WHERE idea_id = "+idea_id,[],function(tx,results){
 				var response = [];
 				for(var i =0; i<results.rows.length; i++){
-					console.log("daya",JSON.stringify(results.rows.item(i)));
+					//console.log("daya",JSON.stringify(results.rows.item(i)));
 					response.push(results.rows.item(i));
 				}
 				callback(response);
@@ -247,6 +247,20 @@ var db_controller = {
 		db.transaction(function(tx){
 			tx.executeSql("SELECT id,judgement from judgements WHERE idea_id = ? AND chapter_id = ?",
 				[idea_id,chapter_id],function(tx,results){
+					var response = [];
+					for( var i=0; i<results.rows.length; i++ ){
+						response.push(results.rows.item(i));
+					}
+					callback(response);
+				}
+			);
+		});
+	},
+
+	getIdeawiseJudgements : function(idea_id,callback){
+		db.transaction(function(tx){
+			tx.executeSql("SELECT chapter_id,judgement from judgements WHERE idea_id = ? ORDER BY chapter_id",
+				[idea_id],function(tx,results){
 					var response = [];
 					for( var i=0; i<results.rows.length; i++ ){
 						response.push(results.rows.item(i));

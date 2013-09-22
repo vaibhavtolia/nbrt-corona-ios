@@ -259,6 +259,38 @@ td.button{
     background: #DDD;
 }
 
+#judgements-container {
+    text-align: left;
+    margin-top: 1.5em;
+    display: none;
+}
+
+#judgements-container > span{
+    display: inline-block;
+    font-size: 15px;
+    border-bottom: thin solid #333;
+    color: #333;
+    width: 100%;
+    margin-bottom: 0.6em;
+}
+
+#judgements-container > div{
+    margin-bottom: 1em;
+    display: none;
+}
+
+#judgements-container div.answer-box{
+    font-size: 13px;
+}
+
+#judgements-container div.title {
+    font-size: 13px;
+    width: 100%;
+    background: rgba(0,0,0,0.0);
+    padding: 0.2em;
+    border-bottom: thin solid #ccc;
+}
+
 /***********************
     Chapter Page
 ***********************/

@@ -25,7 +25,8 @@ var app = {
         app.bindEventListeners();
         app.getAllIdeas();
         app.check_tour();
-        app.generate_seven_domain();
+        app.get_all_ratings();
+        app.get_all_judgements();
     },
 
     bindEventListeners : function(){
@@ -129,9 +130,20 @@ var app = {
     get_all_ratings : function(){
         console.log("idea_id",app.idea_id);
         db_controller.get_all_ratings(app.idea_id,function(results){
-            console.log(results);
-            //app.generate_seven_domain(results);
+            console.log(JSON.stringify(results[0]));
+            app.generate_seven_domain(results);
         });
+    },
+
+    get_chapter_rating : function(chapter_id,ratings){
+        var rating = 3;
+        for(var i=0; i<ratings.length; i++){
+            if( ratings[i].chapter_id == chapter_id ){
+                rating = ratings[i].rating;
+                break;
+            }
+        }
+        return rating;
     },
 
     generate_seven_domain : function(ratings){
@@ -139,6 +151,9 @@ var app = {
         var height = $(".wrapper").height();
 
         var TEXT_COLOR = "#333333";
+        var BORDER_COLOR = "#999999";
+        var BORDER_WIDTH = 2;
+        var FONT_STYLE = app.get_font_size();
         
         //$("#canvas_container").css({ 'height' : height - 50, 'width' : width - 50 });
         var canvas = document.getElementById('sevendomain');
@@ -152,56 +167,81 @@ var app = {
         var half_height = canvas.height/2; var half_width = canvas.width/2;
         
         
-        canvas_context.fillStyle = app.getDomainColor(3);
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(1,ratings));
         canvas_context.beginPath();
         canvas_context.fillRect(0,0,half_width,half_height);
+
+        canvas_context.strokeStyle = BORDER_COLOR;
+        canvas_context.lineWidth = BORDER_WIDTH;
+        canvas_context.strokeRect(0,0,half_width,half_height);
+
         canvas_context.closePath();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Market",40,40);
-        canvas_context.fillText("Attractiveness",40,58);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Market",10,20);
+        canvas_context.fillText("Attractiveness",10,34);
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(1);
+        //---------------------------------------------------------------------------------------------
+
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(3,ratings));
         canvas_context.beginPath();
         canvas_context.fillRect(half_width,0,half_width,half_height);
+
+        canvas_context.strokeStyle = BORDER_COLOR;
+        canvas_context.lineWidth = BORDER_WIDTH;
+        canvas_context.strokeRect(half_width,0,half_width,half_height);
+
         canvas_context.closePath();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Industry",canvas.width-120,40);
-        canvas_context.fillText("Attractiveness",canvas.width-120,58);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Industry",canvas.width-80,20);
+        canvas_context.fillText("Attractiveness",canvas.width-80,34);
         canvas_context.closePath();
 
+        //------------------------------------------------------------------------------------------------
 
-        canvas_context.fillStyle = app.getDomainColor(1);
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(2,ratings));
         canvas_context.beginPath();
         canvas_context.fillRect(0,half_height,half_width,half_height);
+
+        canvas_context.strokeStyle = BORDER_COLOR;
+        canvas_context.lineWidth = BORDER_WIDTH;
+        canvas_context.strokeRect(0,half_height,half_width,half_height);
+
         canvas_context.closePath();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Target segment benefits",40,canvas.height-58);
-        canvas_context.fillText("and attractiveness",40,canvas.height-40);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Target segment benefits",10,canvas.height-24);
+        canvas_context.fillText("and attractiveness",10,canvas.height-10);
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(1);
+        //-------------------------------------------------------------------------------------------------
+
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(4,ratings));
         canvas_context.beginPath();
         canvas_context.fillRect(half_width,half_height,half_width,half_height);
+
+        canvas_context.strokeStyle = BORDER_COLOR;
+        canvas_context.lineWidth = BORDER_WIDTH;
+        canvas_context.strokeRect(half_width,half_height,half_width,half_height);
+
         canvas_context.closePath();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Competitive and",canvas.width-170,canvas.height-58);
-        canvas_context.fillText("economic sustainability",canvas.width-170,canvas.height-40);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Competitive and",canvas.width-110,canvas.height-24);
+        canvas_context.fillText("economic sustainability",canvas.width-110,canvas.height-10);
         canvas_context.closePath();
 
 
         //draw sectors
         canvas_context.moveTo(half_width,half_height);
         
-        canvas_context.fillStyle = app.getDomainColor(1);
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(5,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(1/6)*Math.PI,(5/6)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
@@ -211,11 +251,11 @@ var app = {
 
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
+        canvas_context.font = FONT_STYLE;
         
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(1);
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(6,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(5/6)*Math.PI,(3/2)*Math.PI);
         canvas_context.lineTo(half_width,half_height);
@@ -224,14 +264,14 @@ var app = {
         canvas_context.fill();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Mission, aspirations,",half_width-160,half_height-78);
-        canvas_context.fillText("propensity for risk",half_width-160,half_height-60);
-        canvas_context.fillText("Connectedness up",half_width-70,half_height+80);
-        canvas_context.fillText("and down value chain",half_width-80,half_height+98);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Mission, aspirations,",half_width-90,half_height-39);
+        canvas_context.fillText("propensity for risk",half_width-90,half_height-25);
+        canvas_context.fillText("Connectedness up",half_width-50,half_height+60);
+        canvas_context.fillText("and down value chain",half_width-50,half_height+74);
         canvas_context.closePath();
 
-        canvas_context.fillStyle = app.getDomainColor(1);
+        canvas_context.fillStyle = app.getDomainColor(app.get_chapter_rating(7,ratings));
         canvas_context.beginPath();
         canvas_context.arc(half_width,half_height,app.getCircleRadius(width,height),(3/2)*Math.PI,(13/6)*Math.PI);        
         canvas_context.lineTo(half_width,half_height);
@@ -240,24 +280,26 @@ var app = {
         canvas_context.fill();
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "15px Arial"
-        canvas_context.fillText("Ability to",half_width+100,half_height-78);
-        canvas_context.fillText("execute",half_width+100,half_height-60);
-        canvas_context.fillText("on CSFs",half_width+100,half_height-42);
+        canvas_context.font = FONT_STYLE;
+        canvas_context.fillText("Ability to",half_width+40,half_height-53);
+        canvas_context.fillText("execute",half_width+40,half_height-39);
+        canvas_context.fillText("on CSFs",half_width+40,half_height-25);
         canvas_context.closePath();
 
-        canvas_context.fillStyle = "#FFF";
+        canvas_context.fillStyle = "#F9F9F9";
         canvas_context.beginPath();
-        canvas_context.fillRect(half_width-70,half_height-15,140,30);
-        canvas_context.lineWidth = 2;
-        canvas_context.strokeStyle = TEXT_COLOR;
-        canvas_context.stroke();
+        canvas_context.fillRect(half_width-60,half_height-15,120,30);
+        
+        canvas_context.strokeStyle = BORDER_COLOR;
+        canvas_context.lineWidth = BORDER_WIDTH;
+        canvas_context.strokeRect(half_width-60,half_height-15,120,30);
+
         canvas_context.closePath();
 
         canvas_context.fillStyle = TEXT_COLOR;
         canvas_context.beginPath();
-        canvas_context.font = "18px Arial"
-        canvas_context.fillText("Team Domains",half_width-60,half_height+7.5);
+        canvas_context.font = "15px Arial"
+        canvas_context.fillText("Team Domains",half_width-50,half_height+5);
         canvas_context.closePath();
     },
 
@@ -299,6 +341,33 @@ var app = {
                 return MIXED;
                 break;
         }
+    },
+
+    get_font_size : function(){
+        var user_agent = window.navigator.userAgent.toLowerCase();
+        if( user_agent.indexOf("ipad") != -1 ){
+            return "15px Arial";
+        }
+        else{
+            return "10px Arial";
+        }
+    },
+
+    get_all_judgements : function(){
+        db_controller.getIdeawiseJudgements(app.idea_id,function(res){ 
+            //console.log("no of judgements", res.length);
+            if( parseInt(res.length) > 0){
+                $("#judgements-container").show();
+                //console.log("inside");
+                for(var i=0; i<res.length; i++){
+                    var chapter_id = parseInt(res[i].chapter_id) + 1;
+                    var judgement = res[i].judgement;
+                    //console.log(judgement);
+                    var template = "<div class='answer-box'><div class='content'>"+judgement+"</div></div>";
+                    $("#judgements-container div:nth-child("+chapter_id+")").show().append(template);
+                }
+            } 
+        });
     }
     
     
