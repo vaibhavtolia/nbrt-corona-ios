@@ -416,20 +416,36 @@ var app = {
         var status = $audio.data("status");
         if( status == null || status == 'false' ){
             var audio_file_path = $p.data('src');
-            //console.log(audio_file_path);
-            var audio = app.getMediaObject(data_url,data_value);
+            console.log("audio_fullpath",audio_file_path);
+            var audio = app.getMediaObject(data_url,data_type,data_value);
+            var flag = 1;
             if( audio == null ){
-                audio = new Media(audio_file_path);
-                var key = data_url+data_value;
+                
+                audio = new Media(audio_file_path, app.onSuccess ,function(err){
+                    console.log(JSON.stringify(err));
+                    helper.makeToast("There occured some error. Maybe the audio file is missing");
+                    $audio.removeClass('play-audio');
+                    $audio.data("status","false");
+                    app.removeMediaObject(data_url,data_type,data_value);
+                });
+
+                console.log("flag",flag);
+
+                var key = data_url+data_type+data_value;
                 var media_object = { "id" : key , "media" : audio };
-                app.audio_file.push(media_object);    
+                app.audio_file.push(media_object);
+
+                app.playAudio(data_url,data_type,data_value);
+
             }
-            audio.play();
-            $audio.addClass('play-audio');
-            $audio.data("status","true");
+            else{
+                audio.play();
+                $audio.addClass('play-audio');
+                $audio.data("status","true");
+            }
         }
         else{
-            var media = app.getMediaObject(data_url,data_value);
+            var media = app.getMediaObject(data_url,data_type,data_value);
             media.pause();
             $audio.removeClass('play-audio');
             $audio.data("status","false");
@@ -437,17 +453,40 @@ var app = {
         
     },
 
-    getMediaObject : function(data_url,data_value){
+    onSuccess : function(){
+                    
+        console.log('playback success');
+
+    },
+
+    getMediaObject : function(data_url,data_type,data_value){
         var media = null;
         if(app.audio_file.length > 0){
             for( var i=0; i<app.audio_file.length; i++ ){
-                if( app.audio_file[i].id == data_url+data_value ){
+                console.log("dsds",app.audio_file[i].id);
+                if( app.audio_file[i].id == data_url+data_type+data_value ){
                     media = app.audio_file[i].media;
                     break;
                 }
             }
         }
         return media;
+    },
+
+    removeMediaObject : function(data_url,data_type,data_value){
+        var index = null;
+        if(app.audio_file.length > 0){
+            for( var i=0; i<app.audio_file.length; i++ ){
+                console.log("dsds",app.audio_file[i].id);
+                if( app.audio_file[i].id == data_url+data_type+data_value ){
+                    index = i;
+                    break;
+                }
+            }
+            if(index != null){
+                app.audio_file.splice(index,1);
+            }
+        }
     },
 
     openJugement : function(){
