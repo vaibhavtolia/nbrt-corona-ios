@@ -439,7 +439,7 @@ td.button{
     margin-top: -55px;
     display: none;
 }
-.overlay #summary,.overlay #risk-box,.overlay #text-box{
+.overlay #summary,.overlay #risk-box,.overlay #text-box,.overlay #audio-box{
     position: relative;
     width: 90%;
     height: auto;
@@ -494,10 +494,10 @@ td.button{
 .overlay #text-box .holder{
     margin-bottom: 0;
 }
-.overlay.show-summary,.overlay.show-riskbox,.overlay.show-textbox{
+.overlay.show-summary,.overlay.show-riskbox,.overlay.show-textbox, .overlay.show-audiobox{
     display: block;
 }
-.overlay.show-summary #summary,.overlay.show-riskbox #risk-box,.overlay.show-textbox #text-box{
+.overlay.show-summary #summary,.overlay.show-riskbox #risk-box,.overlay.show-textbox #text-box,.overlay.show-audiobox #audio-box{
     display: block;
 }
 
@@ -525,6 +525,43 @@ td.button{
 }
 .answer-box div.content img{
     height: 50px;
+}
+.answer-box div.content img#audio-image{
+    height: 36px;
+    position: absolute;
+    padding: 2px;
+    background: #f8f8f0;
+}
+.answer-box#risk div.content img#audio-image{
+    background: #f47d5f;
+}
+.answer-box div#audio-instructions{
+    width: 100%;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 16px;
+    color: rgba(0,0,0,0.3);
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+.answer-box#risk div#audio-instructions{
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.4);
+}
+.answer-box div#audio-instructions.play-audio,.answer-box#risk div#audio-instructions.play-audio{
+    animation: play_animation 0.75s ease-out infinite;
+    -webkit-animation: play_animation 0.75s ease-out infinite;
+    background: url('../img/11_wave.png');
+    background-size: 50%;
+    background-position-y: 50%;
+    color: transparent;
+    text-shadow : 0px 0px 0px rgba(0,0,0,0);
+}
+
+@-webkit-keyframes play_animation {
+  0%   { background-position-x: 0;  }
+  100%  { background-position-x: -100%;  }
 }
 
 #image-viewer{

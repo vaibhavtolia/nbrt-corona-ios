@@ -8,6 +8,7 @@ var app = {
     gallery_init : false,
     db_req_count : 0,
     question_view : {},
+    audio_file : [],
 
     initialize: function() {
         this.bindEvents();
@@ -101,8 +102,8 @@ var app = {
                                 answer_template += "<a href='#' data-url='answer' data-type='text' data-qid='"+question_id+"' data-value='"+aid+"'><div class='answer-box'><div class='content'>"+answer+"</div></div></a>";
                                 break;
                             case "audio" :
-                                //console.log(app.image_fullpath+answer);
-                                answer_template +=  "<a href='#' data-url='answer' data-type='audio' data-value='"+aid+"'><div class='answer-box'><div class='content'><audio controls><source src='"+app.audio_fullpath+answer+"' type='audio/ogg'></audio></div></div></a>";
+                                //console.log(app.audio_fullpath+answer);
+                                answer_template +=  "<a href='#' data-url='answer' data-type='audio' data-value='"+aid+"' data-src='"+app.audio_fullpath+answer+"'><div class='answer-box'><div class='content'><img src='img/audio.png' id='audio-image'><div id='audio-instructions'>Tap to Play/Pause</div></div></div></a>";
                                 break;
                             case "image" :
                                 //console.log(app.image_fullpath+answer);
@@ -138,7 +139,7 @@ var app = {
                                 risk_template += "<a href='#' data-url='risks' data-type='text' data-qid='"+question_id+"' data-value='"+rid+"'><div class='answer-box' id='risk'><div class='content'>"+risk+"</div></div></a>";
                                 break;
                             case "audio" :
-                                risk_template +=  "<a href='#' data-url='risks' data-type='audio' data-value='"+rid+"'><div class='answer-box' id='risk'><div class='content'></div></div></a>";
+                                risk_template +=  "<a href='#' data-url='risks' data-type='audio' data-value='"+rid+"' data-src='"+app.audio_fullpath+risk+"'><div class='answer-box' id='risk'><div class='content'><img src='img/audio_w.png' id='audio-image'><div id='audio-instructions'>Tap to Play/Pause</div></div></div></a>";
                                 break;
                             case "image" :
                                 risk_template +=  "<a href='#' data-url='risks' data-type='image' data-value='"+rid+"'><div class='answer-box' id='risk'><div class='content'><img src='"+app.image_fullpath+risk+"' /></div></div></a>";
@@ -323,7 +324,7 @@ var app = {
                 app.showTextEdit(data_url,data_type,data_value);
                 break;
             case "audio" :
-                
+                app.playAudio(data_url,data_type,data_value);
                 break;
             case "image" :
                 app.showImageGallery(data_url,data_type,data_value);
@@ -408,6 +409,47 @@ var app = {
                 break;
         }
     },
+
+    playAudio : function(data_url,data_type,data_value){
+        $p = $("a[data-url='"+data_url+"'][data-type='"+data_type+"'][data-value='"+data_value+"']");
+        $audio = $p.children().children().children().next();
+        var status = $audio.data("status");
+        if( status == null || status == 'false' ){
+            var audio_file_path = $p.data('src');
+            //console.log(audio_file_path);
+            var audio = app.getMediaObject(data_url,data_value);
+            if( audio == null ){
+                audio = new Media(audio_file_path);
+                var key = data_url+data_value;
+                var media_object = { "id" : key , "media" : audio };
+                app.audio_file.push(media_object);    
+            }
+            audio.play();
+            $audio.addClass('play-audio');
+            $audio.data("status","true");
+        }
+        else{
+            var media = app.getMediaObject(data_url,data_value);
+            media.pause();
+            $audio.removeClass('play-audio');
+            $audio.data("status","false");
+        }
+        
+    },
+
+    getMediaObject : function(data_url,data_value){
+        var media = null;
+        if(app.audio_file.length > 0){
+            for( var i=0; i<app.audio_file.length; i++ ){
+                if( app.audio_file[i].id == data_url+data_value ){
+                    media = app.audio_file[i].media;
+                    break;
+                }
+            }
+        }
+        return media;
+    },
+
     openJugement : function(){
         var url = "judgement.html?ch="+app.chapter_id+"&idea_id="+app.idea_id;
         window.location = url;
