@@ -46,18 +46,55 @@ function startRecord() {
     'use strict';
 
     console.log("start record...");
+    
     if(navigator.audio && confirm("Delete existing recording?")) {
         deleteRecording();
         return;
     }
 
     app.hideActionbar();
+    app.startAudioAnimation();
 
     RECORD_FILENAME = app.generatefilename();
 
-
     // first, we need to recreate the wav file
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFsForCreate, logError);
+    //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, logError);
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        var entry = fileSystem.root;
+        entry.getDirectory("nbrt/audio/", {create: true, exclusive: false}, function(dir){
+
+            //console.log('found/created dir : '+dir.fullPath);
+            var fullPath = dir.fullPath;
+            //console.log(fullPath);
+
+            RECORD_FILEPATH = fullPath + '/' + RECORD_FILENAME;
+
+            console.log(RECORD_FILEPATH);
+
+
+            fileSystem.root.getFile(RECORD_FILEPATH, {create: true, exclusive : true}, function() {
+                
+                console.log('created wav file');
+                console.log("Initializing audio...");
+                navigator.audio = new Media(RECORD_FILEPATH,recording_success,recording_failure);
+                console.log("Initializing audio...OK");
+                CD_BUTTON.html('SAVED');
+                RECORD_BUTTON.html('STOP');
+                console.log("Starting recording...");
+                navigator.audio.startRecord();
+                console.log("Starting recording...OK");
+
+                startTimer();
+
+            }, logError);
+
+
+            
+        }, function(err){
+            console.log("error could not find/create dir "+err.code);
+            callback(null);
+        });
+    }, null);
 }
 
 function startTimer(){
@@ -89,6 +126,7 @@ function stopRecord() {
     navigator.audio.stopRecord();
 
     app.showActionbar();
+    app.stopAudioAnimation();
 
     stopTimer();
 }
@@ -135,43 +173,43 @@ function recording_failure(error) {
     console.log("Recording failed: " + error);
 }
 
-function gotFsForCreate(fileSystem) {
+// function gotFsForCreate(fileSystem) {
 
-    'use strict';
+//     'use strict';
 
-    if (!RECORD_FILEPATH) {
+//     if (!RECORD_FILEPATH) {
 
-        var folder = "nbrt/audio/";
-        var fullPath = "";
+//         var folder = "nbrt/audio/";
+//         var fullPath = "";
 
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-                var entry = fileSystem.root;
-                entry.getDirectory(folder, {create: true, exclusive: false}, function(dir){
+//         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+//                 var entry = fileSystem.root;
+//                 entry.getDirectory(folder, {create: true, exclusive: false}, function(dir){
 
-                    //console.log('found/created dir : '+dir.fullPath);
-                    fullPath = "file://localhost"+dir.fullPath;
-                });
-        },null);
+//                     //console.log('found/created dir : '+dir.fullPath);
+//                     fullPath = "file://localhost"+dir.fullPath;
+//                 });
+//         },null);
 
-        RECORD_FILEPATH = fullPath + '/' + RECORD_FILENAME;
-        console.log('noting record file path as: ' + RECORD_FILEPATH);
-    }
+//         RECORD_FILEPATH = fullPath + '/' + RECORD_FILENAME;
+//         console.log('noting record file path as: ' + RECORD_FILEPATH);
+//     }
 
-    fileSystem.root.getFile(RECORD_FILEPATH, {create: true}, function() {
-        console.log('created wav file');
-        console.log("Initializing audio...");
-        navigator.audio = new Media(RECORD_FILEPATH,recording_success,recording_failure);
-        console.log("Initializing audio...OK");
-        CD_BUTTON.html('SAVED');
-        RECORD_BUTTON.html('STOP');
-        console.log("Starting recording...");
-        navigator.audio.startRecord();
-        console.log("Starting recording...OK");
+//     fileSystem.root.getFile(RECORD_FILEPATH, {create: true}, function() {
+//         console.log('created wav file');
+//         console.log("Initializing audio...");
+//         navigator.audio = new Media(RECORD_FILEPATH,recording_success,recording_failure);
+//         console.log("Initializing audio...OK");
+//         CD_BUTTON.html('SAVED');
+//         RECORD_BUTTON.html('STOP');
+//         console.log("Starting recording...");
+//         navigator.audio.startRecord();
+//         console.log("Starting recording...OK");
 
-        startTimer();
+//         startTimer();
 
-    }, logError);
-}
+//     }, logError);
+// }
 
 function gotFsForDelete(fileSystem) {
 

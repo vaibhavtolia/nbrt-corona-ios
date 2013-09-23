@@ -70,6 +70,14 @@ var app = {
     hideActionbar : function(){
         $(".action-bar").hide();
     },
+
+    startAudioAnimation : function(){
+        $("#audio > div").addClass("animate-audio");
+    },
+
+    stopAudioAnimation : function(){
+        $("#audio > div").removeClass("animate-audio");
+    },
     
     saveMedia : function(){
         var response_type = app.response_type;
